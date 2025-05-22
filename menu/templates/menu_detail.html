@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block title %}Menu Detail - {{ menu.name }}{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <h2 class="page-title" id="menu-name">{{ menu.name }}</h2>
+            <p>{{ menu.description }}</p>
+            <img src="{{ menu.image.url }}" alt="{{ menu.name }} Image" class="menu-image img-fluid">
+        </div>
+        <div class="col-md-6">
+            <h3 class="section-title">What is on the menu?</h3>
+            <ul class="list-group">
+                {% for item in menu.item_set.all %}
+                <li class="list-group-item">
+                    <div class="item-details">
+                        <h4>{{ item.name }}</h4>
+                        <p>{{ item.description }}</p>
+                        <p>${{ item.price }}</p>
+                    </div>
+                    <img src="{{ item.image.url }}" alt="{{ item.name }} Image" class="item-image img-fluid">
+                    <a href="{% url 'place_order' item.id %}" class="btn btn-primary">
+                        <i class="fas fa-cart-plus"></i>
+                        Place Order</a>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</div>
+{% endblock %}

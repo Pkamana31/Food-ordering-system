@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block title %}Customer Profile{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h2 class="page-title">My Profile</h2>
+    <div class="profile-details">
+        <p><strong>Username:</strong> {{ profile.user.username }}</p>
+        <p><strong>Email:</strong> {{ profile.user.email }}</p>
+        <p><strong>Phone Number:</strong> {{ profile.phone_number }}</p>
+        <p><strong>Address:</strong> {{ profile.address }}</p>
+    </div>
+    <a href="{% url 'signout' %}" class="btn btn-primary">
+        <i class="fas fa-sign-out-alt">
+            
+        </i> Sigout</a>
+
+    <a href="{% url 'edit_profile' %}" class="btn btn-primary">
+        <i class="fas fa-user-edit"></i>
+        Edit Profile</a>
+
+    <h2 class="page-title">My Orders</h2>
+    <div class="order-history">
+        {% if orders %}
+            <ul class="list-group">
+                {% for order in orders %}
+                <li class="list-group-item">
+                    <div class="order-info">
+                        <p>Order ID: {{ order.id }}</p>
+                        <p>Total: ${{ order.total_price }}</p>
+                    </div>
+                    <div class="order-actions">
+                        {% comment %} <a href="{% url 'order_detail' order.id %}" class="btn btn-primary">View Details</a> {% endcomment %}
+                        <a href="{% url 'reorder' order.id %}" class="btn btn-success">
+                            <i class="fas fa-redo-alt"></i>
+                            Reorder</a>
+                    </div>
+                </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No orders found.</p>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

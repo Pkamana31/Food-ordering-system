@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block title %}Order Detail{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h2 class="page-title">Order Detail</h2>
+    <div class="order-details">
+        <div class="row">
+            <div class="col-md-6">
+                <h3>Your Order Information</h3>
+                <p><strong>Order ID:</strong> {{ order.id }}</p>
+                <p><strong>Total Price:</strong> {{ order.total_price }}</p>
+                <p><strong>Location:</strong> {{ order.location }}</p>
+                <p><strong>Status:</strong> {{ order.status }}</p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <h3>What you ordered</h3>
+                <ul class="list-group">
+                    {% for ordered_item in order.ordereditem_set.all %}
+                    <li class="list-group-item">
+                        <span>{{ ordered_item.item.name }}</span>
+                        <span class="badge">Quantity: {{ ordered_item.quantity }}</span>
+                        <span class="badge">Price: {{ ordered_item.price }}</span>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

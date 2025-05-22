@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block title %}Order Confirmation{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1>Order Confirmation</h1>
+    <p>Thank you for your order! Your order number is {{ order.id }}.</p>
+    <p>Your order will be delivered to {{ order.location.address }}.</p>
+    <p>Your total is ${{ order.total_price }}.</p>
+</div>
+
+{% endblock %}

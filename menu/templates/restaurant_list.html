@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block title %}Restaurant List{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h2 class="page-title">Restaurants</h2>
+    <div class="restaurant-list">
+        {% for restaurant in restaurants %}
+        <div class="restaurant-item">
+            <div class="restaurant-details">
+                <h3>{{ restaurant.name }}</h3>
+                <p> <i class="fa fa-map-marker"></i>
+                    {{ restaurant.location.name }},
+                    {{ restaurant.location.address }}</p>
+            </div>
+            <div class="restaurant-image">
+                <img src="{{ restaurant.image.url }}" alt="{{ restaurant.name }} Image" style="width: 275px; height: 200px;">
+            </div>
+            <div class="action-buttons">
+                <a href="{% url 'restaurant_detail' restaurant.id %}" class="btn btn-primary">View Details</a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
